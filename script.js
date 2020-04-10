@@ -235,7 +235,7 @@ dropdownCitiesFrom.addEventListener('click', (event) => {
 
 formSearch.addEventListener('submit', (event) => {
     event.preventDefault();
-    
+    // отображаем лоадер
     loader.style.display = 'block';
 
 
@@ -250,8 +250,12 @@ const formData = {
 
 if (formData.from && formData.to) {
 
+ // делаем запрос на сервер, это асинхронная функция, мы не знаем точное время ее выполнения
+ // выполнение кода не останавливается
+
 const requesData = `?depart_date=${formData.when}&origin=${formData.from.code}`+
 `&destination=${formData.to.code}&one_way=true&token=`;
+
 
 //const requesData = '?depart_date=' + formData.when +
 //'&origin=' + formData.from +
@@ -259,12 +263,17 @@ const requesData = `?depart_date=${formData.when}&origin=${formData.from.code}`+
 //'&one_way=true&token=' + API_KEY;
 
 getData (proxy + calendar + requesData, (response) => {
-renderCheap (response, formData.when);
+  // это называется callback
+  // когда создалась эта функция - то одним из параметров она принимает другую функцию, 
+  // которая вызовется в результате успешного ответа от сервера
+  // const getData = (url, callback, errorFunc = console.error)
+    renderCheap (response, formData.when);
     });
-                      
+  // если мы тут спрячем лоадер - тоже будет правильно                
     } else {
         alert ('Введите корректное название города.');
     }
+  // и получается мы не ждем пока выполнится getData, и сразу вызывается 
 });
 
 // Вызовы функций
