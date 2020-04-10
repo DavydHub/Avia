@@ -207,6 +207,8 @@ const renderCheap = (data, date) => {
 
     renderCheapDay (cheapTicketDay);
     renderCheapYear (cheapTicketYear);
+
+    loader.style.display = 'none';
 };
 
 
@@ -263,7 +265,6 @@ renderCheap (response, formData.when);
     } else {
         alert ('Введите корректное название города.');
     }
-    loader.style.display = 'none';
 });
 
 // Вызовы функций
