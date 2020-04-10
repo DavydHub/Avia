@@ -13,7 +13,6 @@ const formSearch = document.querySelector('.form-search'),
 // Данные
 
 
-
 const citiesApi = 'http://api.travelpayouts.com/data/ru/cities.json';
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 const API_KEY = '680d7cefe7668eb6f70e4e319a328b91';
@@ -234,7 +233,8 @@ dropdownCitiesFrom.addEventListener('click', (event) => {
 
 formSearch.addEventListener('submit', (event) => {
     event.preventDefault();
-
+    
+    loader.style.display = 'block';
 
 
 const cityFrom = city.find((item) => inputCitiesFrom.value === item.name);
@@ -263,9 +263,8 @@ renderCheap (response, formData.when);
     } else {
         alert ('Введите корректное название города.');
     }
-
+    loader.style.display = 'none';
 });
-
 
 // Вызовы функций
 
@@ -284,18 +283,4 @@ getData (proxy + citiesApi, (data) => {
       });
     console.log (city);
   
-});
-
-
-
-document.addEventListener('readystatechange', () => {
-
-    if (document.readyState == 'loading') {
-        
-    }  else {
-      
-    };
-    
-    console.log(document.readyState)
-
 });
